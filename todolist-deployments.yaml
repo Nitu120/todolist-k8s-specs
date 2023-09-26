@@ -1,46 +1,88 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: whoami-lab-v1
+  name: todolist-web-v1
   labels:
     kubernetes.azureauthority.in: deployments
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: whoami-lab
+      app: todolist-web
       version: v1
   template:
     metadata:
       labels:
-        app: whoami-lab
+        app: todolist-web
         version: v1
     spec:
       containers:
         - name: app
-          image: sixeyed/whoami:21.04
+          image: nitu1122/todo-list-web:1.0
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: whoami-lab-v2
+  name: todolist-save-handler-v2
   labels:
     kubernetes.azureauthority.in: deployments
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: whoami-lab
+      app: todolist-save-handler
       version: v2
   template:
     metadata:
       labels:
-        app: whoami-lab
+        app: todolist-save-handler
         version: v2
     spec:
       containers:
         - name: app
-          image: sixeyed/whoami:21.04
-          env:
-            - name: WHOAMI_MODE
-              value: q
+          image: nitu1122/todo-list-save-handler
+----
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: todo-queue-v2
+
+  labels:
+
+    kubernetes.azureauthority.in: deployments
+
+spec:
+
+  replicas: 1
+
+  selector:
+
+    matchLabels:
+
+      app: todo-queue
+
+      version: v2
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: todo-queue
+
+        version: v2
+
+    spec:
+
+      containers:
+
+        - name: app
+
+          image: redis:6.2-alpine
+
+          
+         
