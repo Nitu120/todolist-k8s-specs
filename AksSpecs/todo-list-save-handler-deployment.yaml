@@ -36,7 +36,10 @@ spec:
       restartPolicy: Always
       volumes:
       - name: appsettings
-        configMap:
-            name: appsettings
+        csi:
+          driver: sectets-store.csi.k8s.io
+          readOnly: True
+          volumeAttributes:
+            secretProviderClass: scp-keyvault-01  
          
 status: {}
